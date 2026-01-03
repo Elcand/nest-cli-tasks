@@ -15,18 +15,17 @@ export class TasksRepository {
     return tasks.find((task: any) => task.id === id);
   }
 
-  async create(task: string){
+  async create(task: string) {
     const data = await readFile('tasks.json', 'utf-8');
     const tasks = JSON.parse(data);
 
-    const newTask = { 
+    const newTask = {
       id: tasks.length + 1,
-      content: task
+      content: task,
     };
 
     tasks.push(newTask);
 
     await writeFile('tasks.json', JSON.stringify(tasks, null, 2), 'utf-8');
   }
-  
 }
